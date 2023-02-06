@@ -18,7 +18,7 @@ public class Banco {
                         idade INTEGER,
                         cpf VARCHAR(255),
                         login VARCHAR(255),
-                        senha VARCHAR(255),
+                        senha VARCHAR(255)
                     )
                     """);
             System.out.println("[banco] Tabela `users` criada com sucesso.");
