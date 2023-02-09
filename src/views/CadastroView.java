@@ -7,17 +7,17 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import src.pessoa.*;
+import src.models.pessoas.Usuario;
 
 public class CadastroView extends JFrame {
     private final JFrame frame;
 
-    private JTextField telefoneField;
-    private JTextField nomeField;
-    private JTextField idadeField;
-    private JTextField cpfField;
-    private JTextField usuarioField;
-    private JTextField senhaField;
+    private final JTextField telefoneField;
+    private final JTextField nomeField;
+    private final JTextField idadeField;
+    private final JTextField cpfField;
+    private final JTextField usuarioField;
+    private final JTextField senhaField;
 
     public CadastroView() throws IOException, FontFormatException {
         super();
@@ -114,7 +114,7 @@ public class CadastroView extends JFrame {
         JLabel senha = new JLabel("Senha:");
         senha.setBounds(5, 450, 120,30);
         senha.setFont(fonte);
-        senha.setForeground(Color.black);
+        senha.setForeground(Color.white);
         frame.add(senha);
 
         JTextField senhaField = new JPasswordField();
@@ -145,11 +145,19 @@ public class CadastroView extends JFrame {
                     Integer.parseInt(this.idadeField.getText()),
                     this.cpfField.getText(),
                     this.usuarioField.getText(),
-                    this.senhaField.getText()
+                    this.senhaField.getText(),
+                    this.frame
             );
         } catch (SQLException e) {
             System.out.println("[erro] Erro ao criar usuário");
             System.out.println("[erro] " + e.getMessage());
+
+            JOptionPane.showMessageDialog(
+                    this.frame,
+                    e.getMessage(),
+                    "Zubank - Erro",
+                    JOptionPane.ERROR_MESSAGE
+            );
         }
     }
 

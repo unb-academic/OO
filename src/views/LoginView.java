@@ -76,11 +76,11 @@ public class LoginView extends JFrame {
     }
 
     private void clickLogin(ActionEvent actionEvent) {
-        System.out.println("[view] Realizando login...");
+        System.out.println("[view] Realizando login.");
     }
 
     private void clickCadastro(ActionEvent actionEvent) {
-        System.out.println("[view] Realizando cadastro...");
+        System.out.println("[view] Iniciando view de cadastro.");
 
         try {
             new CadastroView().mostrar();

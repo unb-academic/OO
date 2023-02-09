@@ -1,4 +1,4 @@
-package src.pessoa;
+package src.models.pessoas;
 
 class Pessoa {
     private String nome;
