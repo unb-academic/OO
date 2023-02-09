@@ -433,7 +433,7 @@
 											"top": 422,
 											"width": 111.66796875,
 											"height": 13,
-											"text": "+login: String",
+											"text": "+loginView: String",
 											"horizontalAlignment": 0
 										}
 									],
@@ -711,7 +711,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGFoO+CuFF/U8g="
 							},
-							"name": "login",
+							"name": "loginView",
 							"type": "String"
 						}
 					]

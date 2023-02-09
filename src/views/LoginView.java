@@ -6,10 +6,10 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
-public class Login extends JFrame {
+public class LoginView extends JFrame {
     private final JFrame frame;
 
-    public Login() throws IOException, FontFormatException {
+    public LoginView() throws IOException, FontFormatException {
         super();
 
         // Fonte
@@ -81,6 +81,13 @@ public class Login extends JFrame {
 
     private void clickCadastro(ActionEvent actionEvent) {
         System.out.println("[view] Realizando cadastro...");
+
+        try {
+            new CadastroView().mostrar();
+        } catch (IOException | FontFormatException e) {
+            System.out.println("[view] Não foi possível realizar o cadastro.");
+            System.out.println("[erro] " + e.getMessage());
+        }
     }
 
     public void mostrar() {
