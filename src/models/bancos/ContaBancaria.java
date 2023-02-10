@@ -5,14 +5,15 @@ import src.main.Banco;
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ContaBancaria {
-    private String banco;
-    private int numAgencia;
-    private int numConta;
-    private int digitoConta;
-    private double saldo;
+    private final String banco;
+    private final int numAgencia;
+    private final int numConta;
+    private final int digitoConta;
+    private final double saldo;
 
     public ContaBancaria(String banco, int numAgencia, int numConta, int digitoConta, double saldo) {
         this.banco = banco;
@@ -47,5 +48,33 @@ public class ContaBancaria {
 
             System.out.println("[conta-bancária] Erro ao criar conta bancária.");
         }
+    }
+
+    public static ContaBancaria get(int idUsuario) throws SQLException {
+        Connection conexao = Banco.criarConexao();
+
+        PreparedStatement stmt = conexao.prepareStatement("""
+                SELECT * FROM contas_bancarias WHERE id_usuario = ?
+                """);
+
+        stmt.setInt(1, idUsuario);
+
+        ResultSet resultSet = stmt.executeQuery();
+
+        if (!resultSet.next()) {
+            return null;
+        }
+
+        return new ContaBancaria(
+                resultSet.getString("banco"),
+                resultSet.getInt("num_agencia"),
+                resultSet.getInt("num_conta"),
+                resultSet.getInt("digito_conta"),
+                resultSet.getDouble("saldo")
+        );
+    }
+
+    public double getSaldo() {
+        return this.saldo;
     }
 }

@@ -1,13 +1,18 @@
 package src.views;
 
+import src.main.Login;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginView extends JFrame {
     private final JFrame frame;
+    private final JTextField usuarioField;
+    private final JPasswordField senhaField;
 
     public LoginView() throws IOException, FontFormatException {
         super();
@@ -36,6 +41,7 @@ public class LoginView extends JFrame {
         usuarioField.setText("");
         usuarioField.setBounds(85, 50, 140, 30);
         usuarioField.setVisible(true);
+        this.usuarioField = usuarioField;
         frame.add(usuarioField);
 
         // Senha
@@ -50,6 +56,7 @@ public class LoginView extends JFrame {
         senhaField.setBounds(85, 115, 140, 30);
         senhaField.setForeground(Color.black);
         senhaField.setVisible(true);
+        this.senhaField = senhaField;
         frame.add(senhaField);
 
         // Botão de 'login'
@@ -77,6 +84,20 @@ public class LoginView extends JFrame {
 
     private void clickLogin(ActionEvent actionEvent) {
         System.out.println("[view] Realizando login.");
+
+        try {
+            Login.verificarLogin(this.usuarioField.getText(), this.senhaField.getText(), this.frame);
+        } catch (SQLException | IOException | FontFormatException e) {
+            System.out.println("[view] Não foi possível realizar login.");
+            System.out.println("[erro] " + e.getMessage());
+
+            JOptionPane.showMessageDialog(
+                    this.frame,
+                    e.getMessage(),
+                    "Zubank - Erro",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        }
     }
 
     private void clickCadastro(ActionEvent actionEvent) {

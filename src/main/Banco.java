@@ -30,6 +30,7 @@ public class Banco {
                     id_usuario INTEGER NOT NULL,
                     banco VARCHAR(255),
                     num_agencia VARCHAR(255),
+                    num_conta VARCHAR(255),
                     digito_conta VARCHAR(255),
                     saldo REAL,
                     FOREIGN KEY (id_usuario) REFERENCES usuarios (id)

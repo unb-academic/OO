@@ -36,6 +36,9 @@ public class Usuario extends Pessoa {
         stmt.setInt(3, idade);
         stmt.setString(4, cpf);
         stmt.setString(5, login);
+        // Nunca insira a senhas diretamente no banco de dados, isso é uma má prática e
+        // uma falha de segurança gravíssima. Sempre utilize algum tipo de hash de
+        // derivação de chaves como o Bcrypt, Argon2, PBKDF2, etc.
         stmt.setString(6, senha);
 
         int resultado = stmt.executeUpdate();
@@ -67,5 +70,29 @@ public class Usuario extends Pessoa {
             );
             System.out.println("[usuário] Erro ao cadastrar usuário.");
         }
+    }
+
+    public static Usuario get(int idUsuario) throws SQLException {
+        Connection conexao = Banco.criarConexao();
+
+        PreparedStatement stmt = conexao.prepareStatement("""
+                SELECT * FROM usuarios WHERE id = ?
+                """);
+
+        stmt.setInt(1, idUsuario);
+
+        ResultSet resultSet = stmt.executeQuery();
+
+        if (!resultSet.next()) {
+            return null;
+        }
+        return new Usuario(
+                resultSet.getString("nome"),
+                resultSet.getString("telefone"),
+                resultSet.getInt("idade"),
+                resultSet.getString("cpf"),
+                resultSet.getString("login"),
+                resultSet.getString("senha")
+        );
     }
 }

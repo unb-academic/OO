@@ -12,4 +12,8 @@ class Pessoa {
         this.idade = idade;
         this.cpf = cpf;
     }
+
+    public String getNome() {
+        return nome;
+    }
 }
